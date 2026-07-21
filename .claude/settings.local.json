@@ -6,7 +6,10 @@
       "Bash(npm run *)",
       "PowerShell(git -C \"C:\\\\Users\\\\Franck\\\\Desktop\\\\Claude code Teste\\\\Chooser\" rev-parse --is-inside-work-tree 2>$null)",
       "PowerShell(git config --global user.name)",
-      "PowerShell(git config --global user.email)"
+      "PowerShell(git config --global user.email)",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\Franck\\\\Desktop\\\\Claude code Teste\\\\Chooser\"; $env:GCM_INTERACTIVE = 'auto'; $env:GIT_TERMINAL_PROMPT = '1'; git push -u origin main)",
+      "Bash(rm -f public/icons/favicon.svg)",
+      "Bash(find \"/c/Users/Franck/Desktop/Claude code Teste/Chooser\" -name \"*.png\" -path \"*icon*\" 2>/dev/null; echo \"--- check for %20 dir ---\"; ls -la \"/c/Users/Franck/Desktop/Claude%20code%20Teste/Chooser/public/icons/\" 2>/dev/null || echo \"no literal %20 dir\")"
     ]
   }
 }

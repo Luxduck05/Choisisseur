@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icons/favicon.svg'],
+      includeAssets: ['icons/favicon-48.png', 'icons/apple-touch-icon.png'],
       manifest: {
         name: 'Choisisseur — Wheel & Finger Picker',
         short_name: 'Choisisseur',
