@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "Bash(npm run *)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Franck\\\\Desktop\\\\Claude code Teste\\\\Chooser\" rev-parse --is-inside-work-tree 2>$null)",
+      "PowerShell(git config --global user.name)",
+      "PowerShell(git config --global user.email)"
+    ]
+  }
+}
