@@ -1,31 +1,31 @@
-// Playful palette used for wheel segments and finger rings.
+// Brand palette drawn from the charter's amaranth + tangerine-dream ramps.
+// Warm-dominant but spread across hue/lightness so segments and finger rings
+// stay distinguishable.
 export const PALETTE = [
-  '#ff5d73',
-  '#ffb347',
-  '#ffe156',
-  '#7bd88f',
-  '#38c7d8',
-  '#5c95ff',
-  '#9b6bff',
-  '#ff6bcb',
-  '#ff8a5c',
-  '#4ce0b3',
-  '#c3f73a',
-  '#f45b69',
+  '#db3358', // primary amaranth
+  '#ff6633', // tangerine 400
+  '#ffa487', // secondary coral
+  '#e87d94', // amaranth 300
+  '#ff8c66', // tangerine 300
+  '#ad1f3e', // amaranth 600
+  '#cc3300', // tangerine 600
+  '#f0a8b8', // amaranth 200
+  '#ffb399', // tangerine 200
+  '#992600', // tangerine 700
 ]
 
 export function colorFor(i) {
   return PALETTE[((i % PALETTE.length) + PALETTE.length) % PALETTE.length]
 }
 
-// High-contrast set for team divider mode.
+// Most-separated subset for team divider mode.
 export const TEAM_COLORS = [
-  '#ff5d73',
-  '#38c7d8',
-  '#ffe156',
-  '#9b6bff',
-  '#7bd88f',
-  '#ff8a5c',
-  '#5c95ff',
-  '#ff6bcb',
+  '#db3358',
+  '#ff6633',
+  '#ffa487',
+  '#82172e',
+  '#ff8c66',
+  '#cc3300',
+  '#e87d94',
+  '#992600',
 ]

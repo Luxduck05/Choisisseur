@@ -5,7 +5,6 @@ import OptionEditor from './OptionEditor.jsx'
 import WheelManager from './WheelManager.jsx'
 import WinnerBanner from './WinnerBanner.jsx'
 import { makeWheel } from '../../utils/templates.js'
-import * as sound from '../../utils/sound.js'
 
 const DEFAULT_LABELS = ['Pizza', 'Sushi', 'Burgers', 'Tacos', 'Pasta', 'Salad']
 
@@ -14,12 +13,7 @@ export default function WheelMode() {
     makeWheel('My first wheel', DEFAULT_LABELS),
   ])
   const [activeId, setActiveId] = useLocalStorage('chooser.activeWheelId', null)
-  const [muted, setMuted] = useLocalStorage('chooser.muted', false)
   const [winner, setWinner] = useState(null)
-
-  useEffect(() => {
-    sound.setMuted(muted)
-  }, [muted])
 
   const wheel = wheels.find((w) => w.id === activeId) || wheels[0]
 
@@ -87,14 +81,6 @@ export default function WheelMode() {
           />
           Remove winner after spin
         </label>
-        <button
-          className="icon-btn"
-          onClick={() => setMuted(!muted)}
-          aria-label={muted ? 'Unmute sounds' : 'Mute sounds'}
-          title={muted ? 'Unmute' : 'Mute'}
-        >
-          {muted ? '🔇' : '🔊'}
-        </button>
       </div>
 
       <OptionEditor options={wheel.options} onChange={(options) => updateWheel({ options })} />

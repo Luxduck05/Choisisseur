@@ -96,23 +96,22 @@ export default function TouchArea({ mode, count }) {
     sound.fanfare()
   }
 
-  function reset() {
-    clearTimers()
-    setResult(null)
-    mapRef.current.clear()
-    colorSeqRef.current = 0
-    sync()
-    setPhaseBoth('idle')
-  }
-
   const relPos = (e) => {
     const rect = areaRef.current.getBoundingClientRect()
     return { x: e.clientX - rect.left, y: e.clientY - rect.top }
   }
 
   function onPointerDown(e) {
-    if (phaseRef.current === 'done') return
     if (e.pointerType === 'mouse' && e.button !== 0) return
+    // A touch after a finished round starts a fresh one automatically —
+    // this finger becomes the first of the new round.
+    if (phaseRef.current === 'done') {
+      clearTimers()
+      setResult(null)
+      mapRef.current.clear()
+      colorSeqRef.current = 0
+      setPhaseBoth('idle')
+    }
     try {
       areaRef.current.setPointerCapture(e.pointerId)
     } catch {
@@ -204,9 +203,9 @@ export default function TouchArea({ mode, count }) {
       )}
       {phase === 'armed' && <div className="countdown">{seconds}</div>}
       {phase === 'done' && (
-        <button className="btn primary reset-btn" onClick={reset}>
-          ↺ New round
-        </button>
+        <div className="touch-overlay done-hint">
+          <p className="touch-instruction">Touch again to go for another round</p>
+        </div>
       )}
     </div>
   )

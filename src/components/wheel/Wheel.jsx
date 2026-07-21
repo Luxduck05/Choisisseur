@@ -176,7 +176,7 @@ export default function Wheel({ options, onResult }) {
                 x={lx}
                 y={ly}
                 fontSize={fs}
-                fill="#1a1626"
+                fill="#ffffff"
                 fontWeight="700"
                 textAnchor="middle"
                 dominantBaseline="middle"
