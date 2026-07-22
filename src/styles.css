@@ -690,7 +690,8 @@ body {
 .touch-area {
   position: relative;
   flex: 1;
-  margin: 0 8px calc(4px + env(safe-area-inset-bottom));
+  /* Hug the bottom edge — just enough to clear the iOS home indicator. */
+  margin: 0 8px max(6px, calc(env(safe-area-inset-bottom) - 22px));
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background:
