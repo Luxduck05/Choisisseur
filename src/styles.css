@@ -66,7 +66,11 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
 body,
 #root {
   height: 100%;
@@ -79,8 +83,10 @@ body {
   font-family: var(--font-body);
   font-weight: 400;
   -webkit-tap-highlight-color: transparent;
+  /* Lock the document so nothing rubber-bands; scrolling happens inside
+     .app-main only, keeping the fixed background perfectly still. */
+  overflow: hidden;
   overscroll-behavior: none;
-  overflow-x: hidden;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
@@ -185,6 +191,9 @@ body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  /* Inner scrolling must not chain to the document (no page rubber-band). */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   align-items: center;

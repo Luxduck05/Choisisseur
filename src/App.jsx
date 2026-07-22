@@ -19,6 +19,13 @@ export default function App() {
     document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute('content', THEME_COLORS[theme])
+    // Safari sometimes fails to repaint backdrop-filter surfaces when CSS
+    // variables change; nudging a reflow on the next frame forces it.
+    requestAnimationFrame(() => {
+      document.body.style.display = 'none'
+      void document.body.offsetHeight
+      document.body.style.display = ''
+    })
   }, [theme])
 
   useEffect(() => {
