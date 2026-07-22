@@ -68,7 +68,10 @@
 
 html {
   height: 100%;
+  /* The base colour lives here (behind the aura layer) so nothing opaque sits
+     on top of .bg-auras. Body must stay transparent — see note below. */
   background: var(--bg);
+  transition: background-color 0.4s ease;
 }
 
 body,
@@ -82,14 +85,18 @@ body,
    dead band at the bottom. Page rubber-banding is prevented in JS instead
    (touchmove guard in App.jsx). */
 body {
-  background: var(--bg);
+  /* Transparent so the fixed .bg-auras layer shows through everywhere. A
+     solid body background paints ABOVE the negative-z-index aura layer and
+     was masking the auras except in the strip below the layout viewport —
+     that was the "band". */
+  background: transparent;
   color: var(--text);
   font-family: var(--font-body);
   font-weight: 400;
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
   overscroll-behavior: none;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: color 0.4s ease;
 }
 
 /* ---------- Ambient texture & organic background ---------- */
