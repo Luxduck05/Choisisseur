@@ -132,21 +132,6 @@ body {
   overflow: hidden;
 }
 
-.debug-overlay {
-  position: fixed;
-  top: 90px;
-  left: 12px;
-  z-index: 99999;
-  margin: 0;
-  padding: 10px 12px;
-  font: 12px/1.45 var(--font-mono);
-  background: rgba(0, 0, 0, 0.82);
-  color: #4dff88;
-  border-radius: 10px;
-  pointer-events: none;
-  white-space: pre;
-}
-
 /* Installed app only: size to the large viewport so the shell reaches the
    physical bottom of the screen (iOS reserves the home-indicator zone and
    under-reports 100% / dvh there). No retractable toolbar exists in
@@ -719,8 +704,10 @@ body {
 .touch-area {
   position: relative;
   flex: 1;
-  /* Hug the bottom edge — just enough to clear the iOS home indicator. */
-  margin: 0 8px max(6px, calc(env(safe-area-inset-bottom) - 22px));
+  /* Reach the true screen bottom so no background band shows below the card.
+     iOS draws the home indicator over it; rings are placed by touch so the
+     overlap is harmless. */
+  margin: 0 8px 0;
   /* All corners echo the iPhone bezel curvature (screen radius ≈ 55px
      minus the 8px inset). */
   border-radius: 46px;
