@@ -96,7 +96,9 @@ body {
 /* ---------- Ambient texture & organic background ---------- */
 
 .bg-auras {
-  position: fixed;
+  /* Absolute within .app (not fixed): iOS standalone clips fixed layers to a
+     shortened viewport, which left an untextured band at the bottom. */
+  position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
@@ -109,7 +111,7 @@ body {
 }
 
 .grain {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 9000;
   pointer-events: none;
@@ -123,9 +125,18 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  /* 100% tracks the real screen height in installed (standalone) mode,
-     where iOS under-reports dvh and left a dead band at the bottom. */
   height: 100%;
+  overflow: hidden;
+}
+
+/* Installed app only: size to the large viewport so the shell reaches the
+   physical bottom of the screen (iOS reserves the home-indicator zone and
+   under-reports 100% / dvh there). No retractable toolbar exists in
+   standalone, so lvh is safe. */
+@media all and (display-mode: standalone) {
+  .app {
+    height: 100lvh;
+  }
 }
 
 /* ---------- Header + tabs ---------- */
