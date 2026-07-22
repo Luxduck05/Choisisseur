@@ -32,6 +32,28 @@ export default function App() {
     sound.setMuted(muted)
   }, [muted])
 
+  // Block document rubber-banding without overflow:hidden on the root (which
+  // makes iOS standalone clip the layout above the home indicator). Touch
+  // scrolls are only allowed inside elements that can actually scroll.
+  useEffect(() => {
+    const onTouchMove = (e) => {
+      let el = e.target
+      while (el && el !== document.body) {
+        const { overflowY } = getComputedStyle(el)
+        if (
+          (overflowY === 'auto' || overflowY === 'scroll') &&
+          el.scrollHeight > el.clientHeight
+        ) {
+          return
+        }
+        el = el.parentElement
+      }
+      e.preventDefault()
+    }
+    document.addEventListener('touchmove', onTouchMove, { passive: false })
+    return () => document.removeEventListener('touchmove', onTouchMove)
+  }, [])
+
   return (
     <div className="app">
       <div className="grain" aria-hidden="true" />

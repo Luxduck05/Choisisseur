@@ -68,9 +68,7 @@
 
 html {
   height: 100%;
-  overflow: hidden;
-  /* Same background as body so no untextured band can ever show through
-     (iOS standalone mis-measures dvh; everything sizes off 100% instead). */
+  /* Same background as body so no untextured band can ever show through. */
   background: var(--bg);
 }
 
@@ -80,15 +78,17 @@ body,
   margin: 0;
 }
 
+/* NOTE: no overflow:hidden on html/body — clipping the root makes iOS
+   standalone shrink the layout viewport above the home indicator, leaving a
+   dead band at the bottom. Page rubber-banding is prevented in JS instead
+   (touchmove guard in App.jsx). */
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
   font-weight: 400;
   -webkit-tap-highlight-color: transparent;
-  /* Lock the document so nothing rubber-bands; scrolling happens inside
-     .app-main only, keeping the fixed background perfectly still. */
-  overflow: hidden;
+  overflow-x: hidden;
   overscroll-behavior: none;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
