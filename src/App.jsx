@@ -19,12 +19,16 @@ export default function App() {
     document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute('content', THEME_COLORS[theme])
-    // Safari sometimes fails to repaint backdrop-filter surfaces when CSS
-    // variables change; nudging a reflow on the next frame forces it.
+    // Safari/iOS often fails to repaint fixed layers and backdrop-filter
+    // surfaces when CSS variables change (the stale frame clears on the next
+    // interaction). A momentary sub-1 opacity on the root renders the whole
+    // page into one buffer, forcing a full re-composite. Imperceptible.
+    const root = document.documentElement
     requestAnimationFrame(() => {
-      document.body.style.display = 'none'
-      void document.body.offsetHeight
-      document.body.style.display = ''
+      root.style.opacity = '0.999'
+      requestAnimationFrame(() => {
+        root.style.opacity = ''
+      })
     })
   }, [theme])
 
