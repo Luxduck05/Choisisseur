@@ -704,25 +704,13 @@ body {
 .touch-area {
   position: relative;
   flex: 1;
-  /* Reach the true screen bottom so no background band shows below the card.
-     iOS draws the home indicator over it; rings are placed by touch so the
-     overlap is harmless. */
-  margin: 0 8px 0;
-  /* All corners echo the iPhone bezel curvature (screen radius ≈ 55px
-     minus the 8px inset). */
-  border-radius: 46px;
-  border: 1px solid var(--border);
-  background:
-    radial-gradient(50% 40% at 25% 18%, var(--aura-1), transparent 70%),
-    radial-gradient(46% 38% at 82% 78%, var(--aura-2), transparent 70%),
-    var(--surface);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* No card — the finger zone IS the app background (continuous auras + grain
+     showing through), edge to edge, so there is no seam between the zone and
+     the background. */
   overflow: hidden;
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
-  box-shadow: var(--shadow);
 }
 
 .touch-ring {
