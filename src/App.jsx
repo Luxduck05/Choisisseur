@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import TabBar from './components/TabBar.jsx'
 import WheelMode from './components/wheel/WheelMode.jsx'
 import FingerMode from './components/finger/FingerMode.jsx'
@@ -14,22 +14,15 @@ export default function App() {
   )
   const [muted, setMuted] = useLocalStorage('chooser.muted', false)
 
-  useEffect(() => {
+  // Set the theme attribute BEFORE paint so the freshly-mounted DOM (see the
+  // key={theme} on .app) is born in the right theme. Fresh elements have no
+  // cached raster, which sidesteps WebKit not repainting composited layers
+  // (fixed auras, backdrop-filter) on a CSS-variable change.
+  useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme
     document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute('content', THEME_COLORS[theme])
-    // Safari/iOS often fails to repaint fixed layers and backdrop-filter
-    // surfaces when CSS variables change (the stale frame clears on the next
-    // interaction). A momentary sub-1 opacity on the root renders the whole
-    // page into one buffer, forcing a full re-composite. Imperceptible.
-    const root = document.documentElement
-    requestAnimationFrame(() => {
-      root.style.opacity = '0.999'
-      requestAnimationFrame(() => {
-        root.style.opacity = ''
-      })
-    })
   }, [theme])
 
   useEffect(() => {
@@ -59,7 +52,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="app">
+    <div className="app" key={theme}>
       <div className="grain" aria-hidden="true" />
       <div className="bg-auras" aria-hidden="true" />
       <header className="app-header">
