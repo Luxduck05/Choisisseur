@@ -1,9 +1,9 @@
 :root {
   /* Light theme — warm cream, from the tangerine/amaranth ramps. */
   --bg: #fff4ee;
-  --aura-1: rgba(219, 51, 88, 0.28);
-  --aura-2: rgba(255, 102, 51, 0.22);
-  --aura-3: rgba(255, 164, 135, 0.3);
+  --aura-1: rgba(219, 51, 88, 0.42);
+  --aura-2: rgba(255, 102, 51, 0.36);
+  --aura-3: rgba(255, 164, 135, 0.46);
 
   --surface: rgba(255, 255, 255, 0.5);
   --surface-strong: rgba(255, 255, 255, 0.72);
