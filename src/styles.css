@@ -132,6 +132,21 @@ body {
   overflow: hidden;
 }
 
+.debug-overlay {
+  position: fixed;
+  top: 90px;
+  left: 12px;
+  z-index: 99999;
+  margin: 0;
+  padding: 10px 12px;
+  font: 12px/1.45 var(--font-mono);
+  background: rgba(0, 0, 0, 0.82);
+  color: #4dff88;
+  border-radius: 10px;
+  pointer-events: none;
+  white-space: pre;
+}
+
 /* Installed app only: size to the large viewport so the shell reaches the
    physical bottom of the screen (iOS reserves the home-indicator zone and
    under-reports 100% / dvh there). No retractable toolbar exists in
