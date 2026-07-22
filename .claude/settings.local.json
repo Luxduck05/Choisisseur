@@ -10,7 +10,9 @@
       "PowerShell(Set-Location \"C:\\\\Users\\\\Franck\\\\Desktop\\\\Claude code Teste\\\\Chooser\"; $env:GCM_INTERACTIVE = 'auto'; $env:GIT_TERMINAL_PROMPT = '1'; git push -u origin main)",
       "Bash(rm -f public/icons/favicon.svg)",
       "Bash(find \"/c/Users/Franck/Desktop/Claude code Teste/Chooser\" -name \"*.png\" -path \"*icon*\" 2>/dev/null; echo \"--- check for %20 dir ---\"; ls -la \"/c/Users/Franck/Desktop/Claude%20code%20Teste/Chooser/public/icons/\" 2>/dev/null || echo \"no literal %20 dir\")",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(curl -s https://choisisseur-26a4d9.netlify.app/assets/ -o /dev/null)",
+      "Bash(curl -s https://choisisseur-26a4d9.netlify.app/)"
     ]
   }
 }
