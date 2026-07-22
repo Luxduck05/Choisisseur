@@ -68,14 +68,7 @@
 
 html {
   height: 100%;
-  /* Paint the whole canvas — including the strip iOS reserves below the
-     layout viewport in installed apps — with the same aura background as
-     the app, so that band is visually indistinguishable. */
-  background:
-    radial-gradient(58% 48% at 18% 12%, var(--aura-1), transparent 72%),
-    radial-gradient(52% 44% at 88% 22%, var(--aura-2), transparent 72%),
-    radial-gradient(62% 56% at 72% 96%, var(--aura-3), transparent 74%),
-    var(--bg);
+  background: var(--bg);
 }
 
 body,
@@ -102,10 +95,13 @@ body {
 /* ---------- Ambient texture & organic background ---------- */
 
 .bg-auras {
-  /* Absolute within .app (not fixed): iOS standalone clips fixed layers to a
-     shortened viewport, which left an untextured band at the bottom. */
-  position: absolute;
+  /* Fixed so the aura texture paints the entire physical screen, including
+     the strip iOS reserves below the layout viewport in installed apps.
+     (Overshoot the bottom generously — fixed layers are not clipped by the
+     shell, so this covers the band regardless of how iOS measures it.) */
+  position: fixed;
   inset: 0;
+  bottom: -120px;
   z-index: -1;
   pointer-events: none;
   background:
@@ -117,8 +113,9 @@ body {
 }
 
 .grain {
-  position: absolute;
+  position: fixed;
   inset: 0;
+  bottom: -120px;
   z-index: 9000;
   pointer-events: none;
   opacity: var(--grain-opacity);
@@ -709,9 +706,9 @@ body {
   flex: 1;
   /* Hug the bottom edge — just enough to clear the iOS home indicator. */
   margin: 0 8px max(6px, calc(env(safe-area-inset-bottom) - 22px));
-  /* Bottom corners echo the iPhone bezel curvature (screen radius ≈ 55px
+  /* All corners echo the iPhone bezel curvature (screen radius ≈ 55px
      minus the 8px inset). */
-  border-radius: var(--radius) var(--radius) 46px 46px;
+  border-radius: 46px;
   border: 1px solid var(--border);
   background:
     radial-gradient(50% 40% at 25% 18%, var(--aura-1), transparent 70%),
